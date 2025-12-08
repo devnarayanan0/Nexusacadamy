@@ -24,9 +24,9 @@ export default function Home() {
           </div>
 
           <div className="relative z-10 text-center text-primary-foreground px-4 animate-fadeInUp">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-balance leading-tight">Welcome to Elite Academy</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-balance leading-tight">Welcome to Nexus Academy</h1>
             <p className="text-lg md:text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Where Excellence Meets Innovation - Building Tomorrow's Leaders Today
+              Shaping tomorrow's leaders through excellence and innovation
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -113,34 +113,18 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Principal's Message */}
+        {/* Director's Message */}
         <section className="py-12 md:py-16 bg-white">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="relative">
-                <img
-                  src="/principal-in-formal-attire.jpg"
-                  alt="Principal"
-                  className="rounded-2xl shadow-lg w-full object-cover"
-                />
-                <div className="absolute -bottom-4 -right-4 bg-accent text-accent-foreground p-4 rounded-lg shadow-lg font-bold text-2xl w-24 h-24 flex items-center justify-center">
-                  28Y+
-                </div>
-              </div>
-              <div>
-                <p className="text-accent font-semibold uppercase tracking-wide mb-2">Message from Principal</p>
-                <h3 className="text-3xl md:text-4xl font-bold text-primary mb-4">Dr. James Wilson</h3>
-                <p className="text-muted-foreground leading-relaxed mb-6">
-                  "At Elite Academy, we believe education is not just about academics—it's about building character,
-                  fostering critical thinking, and inspiring students to make a positive difference in the world. Our
-                  dedicated faculty and state-of-the-art facilities provide the perfect environment for students to
-                  explore their potential and achieve their dreams."
-                </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  We are committed to nurturing well-rounded individuals who are equipped to face the challenges of
-                  tomorrow with confidence, creativity, and compassion.
-                </p>
-              </div>
+            <div className="bg-gradient-to-br from-primary/10 to-accent/10 border-l-4 border-primary rounded-xl p-8 md:p-12">
+              <p className="text-accent font-semibold uppercase tracking-wide mb-2">Message from Director</p>
+              <h3 className="text-3xl md:text-4xl font-bold text-primary mb-4">Dr. James Wilson</h3>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                "Education here goes beyond textbooks. We focus on building character, encouraging critical thinking, and inspiring students to make a real difference. Our dedicated teachers and modern facilities create the right environment for every student to discover their potential."
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                We're committed to developing well-rounded individuals ready to face tomorrow's challenges with confidence and creativity.
+              </p>
             </div>
           </div>
         </section>
@@ -237,9 +221,9 @@ export default function Home() {
         <section className="py-16 md:py-20 bg-gradient-to-r from-primary to-primary/80">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-primary-foreground">
             <Sparkles className="w-12 h-12 mx-auto mb-4 opacity-80" />
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to Join Elite Academy?</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to Join Nexus Academy?</h2>
             <p className="text-lg opacity-90 mb-8">
-              Start your journey to excellence today. We're accepting admissions for the new academic year.
+              Join us for the new academic year. Admissions are now open.
             </p>
             <Link
               href="/admissions"

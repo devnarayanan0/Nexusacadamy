@@ -8,12 +8,12 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Elite Academy - Premium Education for the Future",
+  title: "Nexus Academy - Premium Education for the Future",
   description:
-    "Elite Academy provides quality education with modern facilities and innovative teaching methods. Join us for a brighter future.",
+    "Nexus Academy provides quality education with modern facilities and innovative teaching methods. Join us for a brighter future.",
   keywords: "school, education, academy, admissions, academics",
   generators: "v0.app",
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export default function RootLayout({

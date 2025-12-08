@@ -9,37 +9,37 @@ export default function Facilities() {
     {
       icon: Laptop,
       title: "Smart Classrooms",
-      desc: "State-of-the-art classrooms with interactive whiteboards, projectors, and digital learning resources",
+      desc: "Interactive whiteboards, projectors, and digital learning tools",
       image: "/modern-classroom-with-smart-board.jpg",
     },
     {
       icon: Beaker,
       title: "Science & Computer Labs",
-      desc: "Well-equipped laboratories with latest scientific instruments and modern computers",
+      desc: "Modern labs with latest equipment and computers",
       image: "/science-laboratory-with-equipment.jpg",
     },
     {
       icon: BookOpen,
       title: "Library",
-      desc: "Comprehensive library with thousands of books, digital resources, and reading sections",
+      desc: "Thousands of books, digital resources, and quiet reading spaces",
       image: "/school-library-with-books.jpg",
     },
     {
       icon: Trophy,
       title: "Sports Complex",
-      desc: "Olympic-size swimming pool, basketball court, cricket field, and fitness center",
+      desc: "Swimming pool, basketball court, cricket field, and gym",
       image: "/sports-complex-and-facilities.jpg",
     },
     {
       icon: Bus,
       title: "Transportation",
-      desc: "Safe and comfortable transport services covering all major areas of the city",
+      desc: "Safe transport covering all major city areas",
       image: "/school-bus-yellow.jpg",
     },
     {
       icon: Users,
       title: "Cafeteria",
-      desc: "Hygienic and nutritious meal options prepared by trained chefs",
+      desc: "Nutritious meals prepared fresh daily",
       image: "/school-cafeteria-dining-area.jpg",
     },
   ]
@@ -53,7 +53,7 @@ export default function Facilities() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Facilities</h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              World-class infrastructure and resources for holistic development
+              World-class infrastructure for holistic development
             </p>
           </div>
         </section>

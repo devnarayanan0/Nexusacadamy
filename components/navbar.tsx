@@ -19,13 +19,12 @@ export function Navbar() {
 
   const mainLinks = [
     { href: "/", label: "Home" },
-    { href: "/admissions", label: "Admissions" },
-    { href: "/about", label: "About Us" },
+    { href: "/admissions", label: "Admission" },
+    { href: "/about", label: "Contact Us" },
   ]
 
   const academicsDropdown = [
-    { href: "/academics", label: "Academics" },
-    { href: "/facilities", label: "Facilities" },
+    { href: "/facilities", label: "Facility" },
     { href: "/students", label: "Students" },
   ]
 
@@ -34,22 +33,19 @@ export function Navbar() {
     { href: "/news", label: "News & Events" },
   ]
 
-  const contactLink = { href: "/contact", label: "Contact Us" }
-
   return (
     <nav
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md" : "bg-white shadow-sm"
-      }`}
+      className={`sticky top-0 z-40 w-full transition-all duration-300 ${isScrolled ? "bg-white shadow-md" : "bg-white shadow-sm"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span className="text-primary-foreground font-bold text-lg">EA</span>
+              <span className="text-primary-foreground font-bold text-lg">NA</span>
             </div>
-            <span className="font-bold text-primary hidden md:inline text-lg">Elite Academy</span>
+            <span className="font-bold text-primary hidden md:inline text-lg">Nexus Academy</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -106,12 +102,7 @@ export function Navbar() {
               </div>
             </div>
 
-            <Link
-              href={contactLink.href}
-              className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-accent/10 rounded-lg transition-colors"
-            >
-              {contactLink.label}
-            </Link>
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -183,13 +174,7 @@ export function Navbar() {
               </div>
             )}
 
-            <Link
-              href={contactLink.href}
-              className="block px-3 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-accent/10 rounded-lg transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              {contactLink.label}
-            </Link>
+
           </div>
         )}
       </div>

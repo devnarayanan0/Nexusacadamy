@@ -12,34 +12,21 @@ interface Message {
 
 const suggestedQuestions = ["Admissions", "Fee Structure", "Events", "Contact Info", "Facilities"]
 
-const botResponses: Record<string, string> = {
-  admissions:
-    "Our admission process involves: 1) Application submission, 2) Entrance exam, 3) Merit evaluation, 4) Interview, 5) Final selection. You can download the application form from our Admissions page.",
-  fee: "Our fee structure varies by grade. Elementary: $5,000/year, Middle School: $7,000/year, High School: $9,000/year. Scholarships are available for deserving students.",
-  events:
-    "Upcoming events include: Foundation Day Celebration (Mar 15), Annual Sports Day (Apr 20), Science Exhibition (May 10). Check our News & Events page for more details.",
-  contact:
-    "You can reach us at: Phone: +1 (555) 123-4567, Email: info@eliteacademy.edu, Address: 123 Education Street, Knowledge City, KC 12345",
-  facilities:
-    "We have state-of-the-art facilities including smart classrooms, science labs, computer labs, library, sports complex, and transport services. Visit our Facilities page for more information.",
-  default:
-    "Hello! I'm your AI Doubt Assistant. I can help you with information about admissions, fees, events, facilities, and contact details. How can I help you today?",
-}
-
 export function AiDoubtAssistant() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       type: "bot",
-      text: "Hello! 👋 I'm the Elite Academy AI Assistant. Ask me about admissions, fees, events, facilities, or contact information!",
+      text: "Hello, I'm Dev from Nexus Academy. Ask me about admissions, fees, events, facilities, or contact info!",
       timestamp: new Date(),
     },
   ])
   const [inputValue, setInputValue] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSendMessage = (text: string) => {
-    if (!text.trim()) return
+  const handleSendMessage = async (text: string) => {
+    if (!text.trim() || isLoading) return
 
     // Add user message
     const userMessage: Message = {
@@ -50,26 +37,43 @@ export function AiDoubtAssistant() {
     }
     setMessages((prev) => [...prev, userMessage])
     setInputValue("")
+    setIsLoading(true)
 
-    // Get bot response
-    setTimeout(() => {
-      let responseText = botResponses["default"]
-      const lowerText = text.toLowerCase()
+    try {
+      // Call Groq API
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: text }),
+      })
 
-      if (lowerText.includes("admission")) responseText = botResponses["admissions"]
-      else if (lowerText.includes("fee")) responseText = botResponses["fee"]
-      else if (lowerText.includes("event")) responseText = botResponses["events"]
-      else if (lowerText.includes("contact")) responseText = botResponses["contact"]
-      else if (lowerText.includes("facilit")) responseText = botResponses["facilities"]
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to get response")
+      }
 
       const botMessage: Message = {
-        id: Date.now().toString(),
+        id: (Date.now() + 1).toString(),
         type: "bot",
-        text: responseText,
+        text: data.response,
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, botMessage])
-    }, 600)
+    } catch (error) {
+      console.error("Chat error:", error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        type: "bot",
+        text: "Sorry, I'm having trouble connecting right now. Please try again later.",
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, errorMessage])
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleSuggestedQuestion = (question: string) => {
@@ -81,9 +85,8 @@ export function AiDoubtAssistant() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl transform transition-all duration-300 flex items-center justify-center group ${
-          isOpen ? "scale-0" : "scale-100 animate-pulse-scale"
-        }`}
+        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl transform transition-all duration-300 flex items-center justify-center group ${isOpen ? "scale-0" : "scale-100 animate-pulse-scale"
+          }`}
       >
         <MessageCircle className="w-6 h-6" />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse"></span>
@@ -96,11 +99,11 @@ export function AiDoubtAssistant() {
           <div className="bg-primary text-primary-foreground p-4 flex justify-between items-center">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-                <span className="text-accent-foreground font-bold">EA</span>
+                <span className="text-accent-foreground font-bold">NA</span>
               </div>
               <div>
-                <h3 className="font-semibold text-sm">Elite Academy Assistant</h3>
-                <p className="text-xs opacity-80">Always here to help</p>
+                <h3 className="font-semibold text-sm">Dev</h3>
+                <p className="text-xs opacity-80">Nexus Academy</p>
               </div>
             </div>
             <button
@@ -116,11 +119,10 @@ export function AiDoubtAssistant() {
             {messages.map((message) => (
               <div key={message.id} className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}>
                 <div
-                  className={`max-w-xs px-4 py-3 rounded-lg text-sm ${
-                    message.type === "user"
-                      ? "bg-primary text-primary-foreground rounded-br-none"
-                      : "bg-white border border-border text-foreground rounded-bl-none"
-                  }`}
+                  className={`max-w-xs px-4 py-3 rounded-lg text-sm ${message.type === "user"
+                    ? "bg-primary text-primary-foreground rounded-br-none"
+                    : "bg-white border border-border text-foreground rounded-bl-none"
+                    }`}
                 >
                   {message.text}
                 </div>
@@ -153,15 +155,21 @@ export function AiDoubtAssistant() {
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && handleSendMessage(inputValue)}
+                onKeyPress={(e) => e.key === "Enter" && !isLoading && handleSendMessage(inputValue)}
                 placeholder="Ask me anything..."
-                className="flex-1 px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background text-sm"
+                disabled={isLoading}
+                className="flex-1 px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-background text-sm disabled:opacity-50"
               />
               <button
                 onClick={() => handleSendMessage(inputValue)}
-                className="p-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                disabled={isLoading || !inputValue.trim()}
+                className="p-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Send className="w-4 h-4" />
+                {isLoading ? (
+                  <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  <Send className="w-4 h-4" />
+                )}
               </button>
             </div>
           </div>

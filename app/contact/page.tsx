@@ -31,7 +31,7 @@ export default function Contact() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Contact Us</h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              We'd love to hear from you. Get in touch with us anytime!
+              Get in touch with us anytime
             </p>
           </div>
         </section>
@@ -66,11 +66,11 @@ export default function Contact() {
                 <Mail className="w-12 h-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-primary mb-2">Email</h3>
                 <p className="text-muted-foreground">
-                  General: info@eliteacademy.edu
+                  General: info@nexusacademy.edu
                   <br />
-                  Admissions: admissions@eliteacademy.edu
+                  Admissions: admissions@nexusacademy.edu
                   <br />
-                  Support: support@eliteacademy.edu
+                  Support: support@nexusacademy.edu
                 </p>
               </div>
             </div>
@@ -170,19 +170,19 @@ export default function Contact() {
               {[
                 {
                   q: "What is the admission process?",
-                  a: "The admission process involves application submission, entrance examination, merit evaluation, personal interview, and final selection. Visit our Admissions page for details.",
+                  a: "Submit application, take entrance exam, attend interview, and receive admission decision. Check our Admissions page for details.",
                 },
                 {
                   q: "When do admissions open?",
-                  a: "Admissions typically open in January for the upcoming academic year. We recommend submitting applications early to secure your child's seat.",
+                  a: "Admissions open in January each year. Apply early to secure your spot.",
                 },
                 {
                   q: "What are the school timings?",
-                  a: "School hours are 8:00 AM to 3:00 PM for primary and 8:30 AM to 4:00 PM for secondary. Exact timings vary by grade.",
+                  a: "Primary: 8:00 AM - 3:00 PM. Secondary: 8:30 AM - 4:00 PM. Timings vary by grade.",
                 },
                 {
                   q: "Do you offer scholarships?",
-                  a: "Yes! We offer merit-based scholarships up to 100% for deserving students. Contact our admissions office for more information.",
+                  a: "Yes! Merit-based scholarships up to 100% are available. Contact admissions for details.",
                 },
               ].map((faq, i) => (
                 <details

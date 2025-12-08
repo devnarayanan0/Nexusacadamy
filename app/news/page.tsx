@@ -55,7 +55,7 @@ export default function News() {
         <section className="bg-gradient-to-r from-primary/10 to-accent/10 py-12 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">News & Events</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl">Latest updates from our vibrant school community</p>
+            <p className="text-lg text-muted-foreground max-w-2xl">Latest updates from our community</p>
           </div>
         </section>
 
@@ -122,9 +122,8 @@ export default function News() {
               ].map((notice, i) => (
                 <div
                   key={i}
-                  className={`p-4 rounded-lg border-l-4 flex items-start justify-between ${
-                    notice.priority === "high" ? "bg-red-50 border-red-500" : "bg-yellow-50 border-yellow-500"
-                  }`}
+                  className={`p-4 rounded-lg border-l-4 flex items-start justify-between ${notice.priority === "high" ? "bg-red-50 border-red-500" : "bg-yellow-50 border-yellow-500"
+                    }`}
                 >
                   <div>
                     <p className={`font-semibold ${notice.priority === "high" ? "text-red-700" : "text-yellow-700"}`}>
@@ -133,9 +132,8 @@ export default function News() {
                     <p className="text-sm text-muted-foreground">{notice.date}</p>
                   </div>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      notice.priority === "high" ? "bg-red-200 text-red-700" : "bg-yellow-200 text-yellow-700"
-                    }`}
+                    className={`px-3 py-1 rounded-full text-xs font-semibold ${notice.priority === "high" ? "bg-red-200 text-red-700" : "bg-yellow-200 text-yellow-700"
+                      }`}
                   >
                     {notice.priority.charAt(0).toUpperCase() + notice.priority.slice(1)}
                   </span>

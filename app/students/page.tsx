@@ -14,7 +14,7 @@ export default function Students() {
         <section className="bg-gradient-to-r from-primary/10 to-accent/10 py-12 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Our Students</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl">Celebrating excellence, leadership, and growth</p>
+            <p className="text-lg text-muted-foreground max-w-2xl">Excellence, leadership, and growth</p>
           </div>
         </section>
 

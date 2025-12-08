@@ -11,13 +11,12 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
               <div className="w-8 h-8 rounded bg-accent flex items-center justify-center">
-                <span className="text-accent-foreground font-bold">EA</span>
+                <span className="text-accent-foreground font-bold">NA</span>
               </div>
-              Elite Academy
+              Nexus Academy
             </h3>
             <p className="text-sm opacity-90">
-              Providing quality education and nurturing excellence since 1995. We believe in developing future leaders
-              through innovative learning.
+              Providing quality education through innovative learning.
             </p>
           </div>
 
@@ -32,7 +31,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/about" className="hover:text-accent transition-colors">
-                  About Us
+                  Contact Us
                 </Link>
               </li>
               <li>
@@ -47,7 +46,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/news" className="hover:text-accent transition-colors">
-                  News & Events
+                  Media
                 </Link>
               </li>
             </ul>
@@ -59,15 +58,15 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
-                <span>123 Education Street, Knowledge City, KC 12345</span>
+                <span>Plot No 2A, Nexus Academy, Porur, Chennai-56.</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 flex-shrink-0" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 7200176502</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                <span>info@eliteacademy.edu</span>
+                <span>contact@nexusacademy.edu</span>
               </li>
             </ul>
           </div>
@@ -100,7 +99,7 @@ export function Footer() {
 
         {/* Bottom Border and Copyright */}
         <div className="border-t border-primary-foreground/20 pt-6 text-center text-sm opacity-80">
-          <p>&copy; 2025 Elite Academy. All rights reserved. | Privacy Policy | Terms of Service</p>
+          <p>&copy; 2025 Nexus Academy. All rights reserved.</p>
         </div>
       </div>
     </footer>

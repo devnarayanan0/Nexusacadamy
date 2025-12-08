@@ -43,27 +43,53 @@ export default function Admissions() {
     if (currentStep > 1) setCurrentStep(currentStep - 1)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Application submitted:", formData)
-    alert("Application submitted successfully! We will contact you soon.")
-    setCurrentStep(1)
-    setFormData({
-      studentName: "",
-      dateOfBirth: "",
-      gender: "",
-      bloodGroup: "",
-      email: "",
-      phone: "",
-      address: "",
-      parentName: "",
-      parentOccupation: "",
-      parentPhone: "",
-      previousSchool: "",
-      lastGrade: "",
-      lastGradePercentage: "",
-      applyingGrade: "",
-    })
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch("/api/admissions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        const errorMsg = data.error || "Failed to submit application"
+        alert(`Error: ${errorMsg}`)
+        throw new Error(errorMsg)
+      }
+
+      alert("Application submitted successfully! We will contact you soon.")
+      setCurrentStep(1)
+      setFormData({
+        studentName: "",
+        dateOfBirth: "",
+        gender: "",
+        bloodGroup: "",
+        email: "",
+        phone: "",
+        address: "",
+        parentName: "",
+        parentOccupation: "",
+        parentPhone: "",
+        previousSchool: "",
+        lastGrade: "",
+        lastGradePercentage: "",
+        applyingGrade: "",
+      })
+    } catch (error) {
+      console.error("Submission error:", error)
+      // Error already shown in alert above
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -74,7 +100,7 @@ export default function Admissions() {
         <section className="bg-gradient-to-r from-primary/10 to-accent/10 py-12 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Admissions</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl">Join our community of learners and future leaders</p>
+            <p className="text-lg text-muted-foreground max-w-2xl">Join our community of learners</p>
           </div>
         </section>
 
@@ -106,43 +132,42 @@ export default function Admissions() {
         </section>
 
         <section className="py-12 md:py-16 bg-gradient-to-r from-primary/5 to-accent/5">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Apply Online</h2>
 
             {/* Form Progress */}
-            <div className="mb-8 flex items-center justify-between">
+            <div className="mb-12 flex items-center justify-between">
               {[1, 2, 3].map((step) => (
                 <div key={step} className="flex items-center">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
-                      currentStep >= step ? "bg-primary text-primary-foreground" : "bg-gray-200 text-gray-600"
-                    }`}
+                    className={`w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg transition-all ${currentStep >= step ? "bg-primary text-primary-foreground" : "bg-gray-200 text-gray-600"
+                      }`}
                   >
                     {step}
                   </div>
                   {step < 3 && (
                     <div
-                      className={`h-1 w-12 md:w-24 transition-all ${currentStep > step ? "bg-primary" : "bg-gray-200"}`}
+                      className={`h-2 w-24 md:w-40 transition-all ${currentStep > step ? "bg-primary" : "bg-gray-200"}`}
                     ></div>
                   )}
                 </div>
               ))}
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-xl border border-border shadow-lg">
+            <form onSubmit={handleSubmit} className="space-y-8 bg-white p-10 md:p-12 rounded-xl border border-border shadow-lg">
               {/* Step 1: Personal Information */}
               {currentStep === 1 && (
                 <div className="space-y-6 animate-fadeIn">
-                  <h3 className="text-xl font-bold text-primary mb-6">Step 1: Personal Information</h3>
+                  <h3 className="text-2xl font-bold text-primary mb-8">Step 1: Personal Information</h3>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-8">
                     <input
                       type="text"
                       placeholder="Student's Full Name"
                       required
                       value={formData.studentName}
                       onChange={(e) => handleInputChange("studentName", e.target.value)}
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                     <input
                       type="date"
@@ -150,16 +175,16 @@ export default function Admissions() {
                       required
                       value={formData.dateOfBirth}
                       onChange={(e) => handleInputChange("dateOfBirth", e.target.value)}
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-8">
                     <select
                       required
                       value={formData.gender}
                       onChange={(e) => handleInputChange("gender", e.target.value)}
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                     >
                       <option value="">Select Gender</option>
                       <option value="male">Male</option>
@@ -171,7 +196,7 @@ export default function Admissions() {
                       placeholder="Blood Group"
                       value={formData.bloodGroup}
                       onChange={(e) => handleInputChange("bloodGroup", e.target.value)}
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                   </div>
                 </div>
@@ -180,16 +205,16 @@ export default function Admissions() {
               {/* Step 2: Contact & Parent Information */}
               {currentStep === 2 && (
                 <div className="space-y-6 animate-fadeIn">
-                  <h3 className="text-xl font-bold text-primary mb-6">Step 2: Contact & Parent Information</h3>
+                  <h3 className="text-2xl font-bold text-primary mb-8">Step 2: Contact & Parent Information</h3>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-8">
                     <input
                       type="email"
                       placeholder="Email Address"
                       required
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                     <input
                       type="tel"
@@ -197,34 +222,34 @@ export default function Admissions() {
                       required
                       value={formData.phone}
                       onChange={(e) => handleInputChange("phone", e.target.value)}
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                   </div>
 
                   <textarea
                     placeholder="Full Address"
-                    rows={3}
+                    rows={4}
                     required
                     value={formData.address}
                     onChange={(e) => handleInputChange("address", e.target.value)}
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                   ></textarea>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-8">
                     <input
                       type="text"
                       placeholder="Parent/Guardian Name"
                       required
                       value={formData.parentName}
                       onChange={(e) => handleInputChange("parentName", e.target.value)}
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                     <input
                       type="text"
                       placeholder="Parent's Occupation"
                       value={formData.parentOccupation}
                       onChange={(e) => handleInputChange("parentOccupation", e.target.value)}
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                   </div>
 
@@ -234,7 +259,7 @@ export default function Admissions() {
                     required
                     value={formData.parentPhone}
                     onChange={(e) => handleInputChange("parentPhone", e.target.value)}
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                   />
                 </div>
               )}
@@ -242,7 +267,7 @@ export default function Admissions() {
               {/* Step 3: Academic Information */}
               {currentStep === 3 && (
                 <div className="space-y-6 animate-fadeIn">
-                  <h3 className="text-xl font-bold text-primary mb-6">Step 3: Academic Information</h3>
+                  <h3 className="text-2xl font-bold text-primary mb-8">Step 3: Academic Information</h3>
 
                   <input
                     type="text"
@@ -250,15 +275,15 @@ export default function Admissions() {
                     required
                     value={formData.previousSchool}
                     onChange={(e) => handleInputChange("previousSchool", e.target.value)}
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                   />
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-8">
                     <select
                       required
                       value={formData.lastGrade}
                       onChange={(e) => handleInputChange("lastGrade", e.target.value)}
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                     >
                       <option value="">Select Last Grade Completed</option>
                       <option value="kg">Kindergarten</option>
@@ -282,7 +307,7 @@ export default function Admissions() {
                       step="0.01"
                       value={formData.lastGradePercentage}
                       onChange={(e) => handleInputChange("lastGradePercentage", e.target.value)}
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                   </div>
 
@@ -290,7 +315,7 @@ export default function Admissions() {
                     required
                     value={formData.applyingGrade}
                     onChange={(e) => handleInputChange("applyingGrade", e.target.value)}
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full px-5 py-4 text-lg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                   >
                     <option value="">Select Applying Grade</option>
                     <option value="kg">Kindergarten</option>
@@ -303,30 +328,38 @@ export default function Admissions() {
               )}
 
               {/* Navigation Buttons */}
-              <div className="flex justify-between gap-4 pt-6">
+              <div className="flex justify-between gap-4 pt-8">
                 <button
                   type="button"
                   onClick={handlePrevStep}
                   disabled={currentStep === 1}
-                  className="flex items-center gap-2 px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold"
+                  className="flex items-center gap-2 px-8 py-4 text-lg border-2 border-primary text-primary rounded-lg hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold"
                 >
-                  <ChevronLeft className="w-5 h-5" /> Previous
+                  <ChevronLeft className="w-6 h-6" /> Previous
                 </button>
 
                 {currentStep < 3 ? (
                   <button
                     type="button"
                     onClick={handleNextStep}
-                    className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-semibold ml-auto"
+                    className="flex items-center gap-2 px-8 py-4 text-lg bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-semibold ml-auto"
                   >
-                    Next <ChevronRight className="w-5 h-5" />
+                    Next <ChevronRight className="w-6 h-6" />
                   </button>
                 ) : (
                   <button
                     type="submit"
-                    className="px-8 py-3 bg-accent text-foreground rounded-lg hover:bg-accent/90 transition-colors font-semibold ml-auto"
+                    disabled={isSubmitting}
+                    className="px-10 py-4 text-lg bg-accent text-foreground rounded-lg hover:bg-accent/90 transition-colors font-semibold ml-auto disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                   >
-                    Submit Application
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-foreground border-t-transparent rounded-full animate-spin"></div>
+                        Submitting...
+                      </>
+                    ) : (
+                      "Submit Application"
+                    )}
                   </button>
                 )}
               </div>
@@ -396,8 +429,7 @@ export default function Admissions() {
             </div>
             <div className="mt-6 p-6 bg-accent/10 border border-accent/20 rounded-lg">
               <p className="text-muted-foreground">
-                <span className="font-semibold">Note:</span> Scholarships up to 100% are available for deserving
-                students based on merit and financial need. Payment plans can be arranged as per mutual consent.
+                <span className="font-semibold">Note:</span> Scholarships up to 100% available based on merit and need. Payment plans can be arranged.
               </p>
             </div>
           </div>

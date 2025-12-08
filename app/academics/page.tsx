@@ -14,7 +14,7 @@ export default function Academics() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Academics</h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              Excellence in education through innovative teaching and learning
+              Excellence through innovative teaching and learning
             </p>
           </div>
         </section>
@@ -28,17 +28,14 @@ export default function Academics() {
                 <Lightbulb className="w-12 h-12 text-primary mb-4" />
                 <h3 className="text-2xl font-bold text-primary mb-4">Approach</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Our curriculum combines traditional academics with modern pedagogical approaches. We focus on
-                  conceptual understanding rather than rote memorization, encouraging critical thinking and
-                  problem-solving skills at every level.
+                  We blend traditional academics with modern teaching methods. Focus is on understanding concepts, not memorizing them. Critical thinking and problem-solving are at the core.
                 </p>
               </div>
               <div className="p-8 bg-gradient-to-br from-accent/10 to-accent/5 rounded-xl">
                 <Award className="w-12 h-12 text-accent mb-4" />
                 <h3 className="text-2xl font-bold text-primary mb-4">Standards</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  We adhere to international academic standards while maintaining Indian educational values. Our
-                  curriculum is regularly updated to align with global best practices and emerging technologies.
+                  We follow international standards while maintaining Indian values. Our curriculum stays current with global best practices and emerging technologies.
                 </p>
               </div>
             </div>
