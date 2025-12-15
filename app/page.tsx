@@ -11,34 +11,35 @@ export default function Home() {
       <Navbar />
       <main>
         {/* Hero Banner */}
-        <section className="relative h-96 md:h-screen bg-gradient-to-r from-primary/90 via-primary/80 to-primary/70 flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 opacity-20">
-            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <defs>
-                <pattern id="dots" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                  <circle cx="5" cy="5" r="1" fill="white" opacity="0.3" />
-                </pattern>
-              </defs>
-              <rect width="100" height="100" fill="url(#dots)" />
-            </svg>
-          </div>
+        <section className="relative h-96 md:h-screen flex items-center justify-center overflow-hidden">
+          {/* Background Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: 'url(/images/school-building.png)',
+              filter: 'brightness(0.6)'
+            }}
+          />
 
-          <div className="relative z-10 text-center text-primary-foreground px-4 animate-fadeInUp">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-balance leading-tight">Welcome to Nexus Academy</h1>
-            <p className="text-lg md:text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-primary/50 to-primary/40" />
+
+          <div className="relative z-10 text-center text-white px-4 animate-fadeInUp">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-balance leading-tight drop-shadow-lg">Welcome to Nexus Academy</h1>
+            <p className="text-lg md:text-xl mb-8 opacity-90 max-w-2xl mx-auto drop-shadow-md">
               Shaping tomorrow's leaders through excellence and innovation
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/admissions"
-                className="px-8 py-3 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 font-semibold transition-all hover:scale-105 flex items-center justify-center gap-2 group"
+                className="px-8 py-3 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 font-semibold transition-all hover:scale-105 flex items-center justify-center gap-2 group shadow-lg"
               >
                 Start Admission
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/academics"
-                className="px-8 py-3 bg-white/20 text-primary-foreground rounded-lg hover:bg-white/30 font-semibold transition-all border border-primary-foreground/30"
+                className="px-8 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg hover:bg-white/30 font-semibold transition-all border border-white/30 shadow-lg"
               >
                 Learn More
               </Link>
@@ -117,14 +118,28 @@ export default function Home() {
         <section className="py-12 md:py-16 bg-white">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-gradient-to-br from-primary/10 to-accent/10 border-l-4 border-primary rounded-xl p-8 md:p-12">
-              <p className="text-accent font-semibold uppercase tracking-wide mb-2">Message from Director</p>
-              <h3 className="text-3xl md:text-4xl font-bold text-primary mb-4">Dr. James Wilson</h3>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                "Education here goes beyond textbooks. We focus on building character, encouraging critical thinking, and inspiring students to make a real difference. Our dedicated teachers and modern facilities create the right environment for every student to discover their potential."
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                We're committed to developing well-rounded individuals ready to face tomorrow's challenges with confidence and creativity.
-              </p>
+              <div className="flex flex-col md:flex-row gap-8 items-start">
+                {/* Principal Image */}
+                <div className="flex-shrink-0">
+                  <img
+                    src="/images/principal.png"
+                    alt="Dr. James Wilson - Principal"
+                    className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-primary/20 shadow-lg"
+                  />
+                </div>
+
+                {/* Message Content */}
+                <div className="flex-1">
+                  <p className="text-accent font-semibold uppercase tracking-wide mb-2">Message from Director</p>
+                  <h3 className="text-3xl md:text-4xl font-bold text-primary mb-4">Dr. James Wilson</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    "Education here goes beyond textbooks. We focus on building character, encouraging critical thinking, and inspiring students to make a real difference. Our dedicated teachers and modern facilities create the right environment for every student to discover their potential."
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We're committed to developing well-rounded individuals ready to face tomorrow's challenges with confidence and creativity.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

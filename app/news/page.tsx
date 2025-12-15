@@ -109,39 +109,7 @@ export default function News() {
           </div>
         </section>
 
-        {/* Important Notices */}
-        <section className="py-12 md:py-16 bg-white">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Important Notices</h2>
-            <div className="space-y-4">
-              {[
-                { date: "April 1", title: "Summer Vacation Begins", priority: "high" },
-                { date: "April 5", title: "Parent-Teacher Conference", priority: "high" },
-                { date: "April 10", title: "Summer Assignment Distribution", priority: "medium" },
-                { date: "July 15", title: "New Academic Year Registration", priority: "high" },
-              ].map((notice, i) => (
-                <div
-                  key={i}
-                  className={`p-4 rounded-lg border-l-4 flex items-start justify-between ${notice.priority === "high" ? "bg-red-50 border-red-500" : "bg-yellow-50 border-yellow-500"
-                    }`}
-                >
-                  <div>
-                    <p className={`font-semibold ${notice.priority === "high" ? "text-red-700" : "text-yellow-700"}`}>
-                      {notice.title}
-                    </p>
-                    <p className="text-sm text-muted-foreground">{notice.date}</p>
-                  </div>
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${notice.priority === "high" ? "bg-red-200 text-red-700" : "bg-yellow-200 text-yellow-700"
-                      }`}
-                  >
-                    {notice.priority.charAt(0).toUpperCase() + notice.priority.slice(1)}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+
       </main>
       <Footer />
       <AiDoubtAssistant />
