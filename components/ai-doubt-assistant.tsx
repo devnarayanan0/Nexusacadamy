@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { MessageCircle, X, Send } from "lucide-react"
+import ReactMarkdown from "react-markdown"
 
 interface Message {
   id: string
@@ -18,7 +19,7 @@ export function AiDoubtAssistant() {
     {
       id: "1",
       type: "bot",
-      text: "Hello, I'm Dev from Nexus Academy. Ask me about admissions, fees, events, facilities, or contact info!",
+      text: "Hello! 👋 I'm **Dev** from **Nexus Academy**.\n\nI can help you with:\n- Admissions process\n- Fee structure\n- Upcoming events\n- School facilities\n- Contact information\n\nFeel free to ask me anything!",
       timestamp: new Date(),
     },
   ])
@@ -124,7 +125,26 @@ export function AiDoubtAssistant() {
                     : "bg-white border border-border text-foreground rounded-bl-none"
                     }`}
                 >
-                  {message.text}
+                  {message.type === "bot" ? (
+                    <div className="text-sm [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+                      <ReactMarkdown
+                        components={{
+                          p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
+                          ul: ({ children }) => <ul className="list-disc ml-4 space-y-1 my-2">{children}</ul>,
+                          ol: ({ children }) => <ol className="list-decimal ml-4 space-y-1 my-2">{children}</ol>,
+                          li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+                          strong: ({ children }) => <strong className="font-bold text-primary">{children}</strong>,
+                          em: ({ children }) => <em className="italic">{children}</em>,
+                          code: ({ children }) => <code className="bg-muted px-1 py-0.5 rounded text-xs">{children}</code>,
+                          blockquote: ({ children }) => <blockquote className="border-l-2 border-primary pl-3 italic my-2">{children}</blockquote>,
+                        }}
+                      >
+                        {message.text}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    message.text
+                  )}
                 </div>
               </div>
             ))}
